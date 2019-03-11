@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import { Route, NavLink } from 'react-router-dom';
 import BookForm from './components/BookForm.js';
-import Book from '/.components/Book.js';
+import Book from './components/Book.js';
 import Books from './components/Books.js';
 import axios from 'axios';
 import './App.css';
