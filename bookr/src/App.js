@@ -4,6 +4,7 @@ import { Route, NavLink } from "react-router-dom";
 import BookForm from "./components/BookForm.js";
 import Book from "./components/Book.js";
 import Books from "./components/Books.js";
+import NavBar from "./components/NavBar";
 import axios from "axios";
 import "./App.css";
 
@@ -39,15 +40,20 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <nav>
+        <NavBar />
+        {/* <nav>
           <NavLink to="/">Home</NavLink>
           <NavLink to="book-form">Add Book</NavLink>
-        </nav>
+        </nav> */}
         <Route
           exact
           path="/"
           render={props => (
-            <Books books={this.state.books} deleteBook={this.deleteBook} />
+            <Books
+              {...props}
+              books={this.state.books}
+              deleteBook={this.deleteBook}
+            />
           )}
         />
         <Route path="/book-form" component={BookForm} />
