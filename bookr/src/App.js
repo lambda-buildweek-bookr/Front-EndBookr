@@ -5,6 +5,7 @@ import BookForm from "./components/BookForm.js";
 import Book from "./components/Book.js";
 import Books from "./components/Books.js";
 import NavBar from "./components/NavBar";
+import Login from "./components/Login";
 import axios from "axios";
 import "./App.css";
 
@@ -45,6 +46,7 @@ class App extends Component {
           <NavLink to="/">Home</NavLink>
           <NavLink to="book-form">Add Book</NavLink>
         </nav> */}
+        <Route path="/login" component={Login} />
         <Route
           exact
           path="/"
