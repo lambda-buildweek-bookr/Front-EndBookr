@@ -59,6 +59,12 @@ class App extends Component {
           )}
         />
         <Route path="/book-form" component={BookForm} />
+        <Route
+          path="/books/:id"
+          render={props => {
+            return <Book {...props} />;
+          }}
+        />
       </div>
     );
   }
