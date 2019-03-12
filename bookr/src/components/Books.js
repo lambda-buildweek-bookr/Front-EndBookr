@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 
-import Book from './Book'
+import Book from "./Book";
 
 class Books extends Component {
   render() {
@@ -10,12 +10,20 @@ class Books extends Component {
         <ul>
           {this.props.books.map(book => {
             return (
-              <Book name={book.name} id={book.id} author={book.author} key={book.id} deleteBook={this.props.deleteBook} />
-            )
+              <Book
+                title={book.title}
+                id={book.id}
+                author={book.author}
+                description={book.brief_desc}
+                image={book.image_url}
+                key={book.id}
+                deleteBook={this.props.deleteBook}
+              />
+            );
           })}
         </ul>
       </div>
-    )
+    );
   }
 }
 
