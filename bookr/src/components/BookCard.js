@@ -26,12 +26,16 @@ const BookCard = props => {
         <Typography component="p">"{props.description}"</Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button
+          onClick={ev => props.deleteBook(ev, props.book.id)}
+          size="small"
+          color="primary"
+        >
           Delete
         </Button>
-        <Link to={`/books/${props.id}`}>
+        <Link to={`/books/${props.book.id}`}>
           <Button size="small" color="primary">
-            Learn More
+            Add Review
           </Button>
         </Link>
       </CardActions>

@@ -7,8 +7,11 @@ import Books from "./components/Books.js";
 import NavBar from "./components/NavBar";
 import Login from "./components/Login";
 import BookSummary from "./components/BookSummary";
+import ConditionalRender from "./components/ConditionalRender/ConditionalRender";
 import axios from "axios";
 import "./App.css";
+
+const View = ConditionalRender(Books)(Login);
 
 class App extends Component {
   constructor(props) {
@@ -48,7 +51,7 @@ class App extends Component {
           <NavLink to="book-form">Add Book</NavLink>
         </nav> */}
         <Route path="/login" component={Login} />
-        <Route exact path="/" component={Books} />
+        <Route exact path="/" component={View} />
         {/* <Route
           exact
           path="/"

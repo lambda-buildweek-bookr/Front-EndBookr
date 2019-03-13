@@ -23,13 +23,22 @@ class Books extends Component {
         console.log(err);
       });
   }
+  deleteBook = (ev, id) => {
+    ev.preventDefault();
+    axios
+      .delete(`https://bookr-buildweek-backend.herokuapp.com/api/books/${id}`)
+      .then(res => {
+        this.setState({ books: res.data });
+      })
+      .catch(err => console.log(err));
+  };
 
   render() {
     return (
       <div>
         {this.state.books.map(book => (
           <Link to={`/books/${book.id}`}>
-            <BookCard key={book.id} book={book} />
+            <BookCard key={book.id} book={book} deleteBook={this.deleteBook} />
           </Link>
         ))}
       </div>
