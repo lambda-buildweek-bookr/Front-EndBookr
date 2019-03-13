@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { NavLink } from "react-router-dom";
 import logowhite from "../design/logowhite.png";
-import AccountCircle from "@material-ui/icons/AccountCircle";
+//import AccountCircle from "@material-ui/icons/AccountCircle";
 
 function NavBar() {
   return (
@@ -46,7 +46,11 @@ function NavBar() {
             >
               <Button color="inherit">Add Book</Button>
             </NavLink>
-            <Button color="inherit">Review</Button>
+            <NavLink
+              style={{ textDecoration: "none", color: "white" }}
+              to="/review">
+              <Button color="inherit">Review</Button>
+            </NavLink>
             <NavLink
               style={{
                 textDecoration: "none",
@@ -58,7 +62,7 @@ function NavBar() {
               to="/login"
             >
               {" "}
-              <AccountCircle />
+              
             </NavLink>
           </div>
         </Toolbar>
