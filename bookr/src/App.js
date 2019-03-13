@@ -6,6 +6,7 @@ import Book from "./components/Book.js";
 import Books from "./components/Books.js";
 import NavBar from "./components/NavBar";
 import Login from "./components/Login";
+import BookSummary from "./components/BookSummary";
 import axios from "axios";
 import "./App.css";
 
@@ -17,17 +18,17 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
-    axios
-      .get("https://bookr-buildweek-backend.herokuapp.com/api/books")
-      .then(res => {
-        console.log(res);
-        this.setState({ books: res.data });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
+  // componentDidMount() {
+  //   axios
+  //     .get("https://bookr-buildweek-backend.herokuapp.com/api/books")
+  //     .then(res => {
+  //       console.log(res);
+  //       this.setState({ books: res.data });
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }
 
   deleteBook = event => {
     axios
@@ -47,7 +48,8 @@ class App extends Component {
           <NavLink to="book-form">Add Book</NavLink>
         </nav> */}
         <Route path="/login" component={Login} />
-        <Route
+        <Route exact path="/" component={Books} />
+        {/* <Route
           exact
           path="/"
           render={props => (
@@ -57,12 +59,12 @@ class App extends Component {
               deleteBook={this.deleteBook}
             />
           )}
-        />
+        /> */}
         <Route path="/book-form" component={BookForm} />
         <Route
           path="/books/:id"
           render={props => {
-            return <Book {...props} />;
+            return <BookSummary {...props} />;
           }}
         />
       </div>
