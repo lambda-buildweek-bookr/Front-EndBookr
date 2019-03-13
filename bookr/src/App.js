@@ -33,14 +33,14 @@ class App extends Component {
   //     });
   // }
 
-  deleteBook = event => {
-    axios
-      .delete(`http://localhost:3000/books/${event.target.id}`)
-      .then(res => {
-        this.setState({ books: res.data });
-      })
-      .catch(err => console.log(err));
-  };
+  // deleteBook = event => {
+  //   axios
+  //     .delete(`http://localhost:3000/books/${event.target.id}`)
+  //     .then(res => {
+  //       this.setState({ books: res.data });
+  //     })
+  //     .catch(err => console.log(err));
+  // };
 
   render() {
     return (
@@ -51,7 +51,7 @@ class App extends Component {
           <NavLink to="book-form">Add Book</NavLink>
         </nav> */}
         <Route path="/login" component={Login} />
-        <Route exact path="/" component={View} />
+        <Route exact path="/" component={Books} />
         {/* <Route
           exact
           path="/"

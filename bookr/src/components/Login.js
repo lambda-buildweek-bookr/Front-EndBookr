@@ -5,38 +5,43 @@ import logo from "../design/logo.png";
 import axios from "axios";
 
 class Login extends React.Component {
-  state = {
-    username: "",
-    password: ""
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "",
+      password: ""
+    };
+  }
+
   handleInput = event => {
     this.setState({
       [event.target.name]: event.target.value
     });
   };
 
-  handleLogin = (ev, token) => {
+  handleLogin = (ev, state) => {
+    state = this.state;
+    console.log(this.state, this.props);
     ev.preventDefault();
     axios
       .post(
         `https://bookr-buildweek-backend.herokuapp.com/api/users/login`,
-        token
+        this.state
       )
       .then(res => {
         localStorage.setItem("jwt", res.data.token);
-        localStorage.setItem("username", res.data.username);
+        localStorage.setItem("name", res.data.name);
+
         this.props.history.push("/");
       })
       .catch(err => {
         console.log(err);
       });
-
-    // window.localStorage.setItem("username", this.state.username);
-    // window.localStorage.setItem("password", this.state.password);
-    // window.location.reload();
-    // this.props.history.push("/");
   };
-
+  // window.localStorage.setItem("username", this.state.username);
+  // window.localStorage.setItem("password", this.state.password);
+  // window.location.reload();
+  // this.props.history.push("/");
   render() {
     return (
       <form
@@ -63,9 +68,9 @@ class Login extends React.Component {
         />
         <TextField
           id="standard-with-placeholder"
-          label="username"
+          label="name"
           placeholder="username"
-          name="username"
+          name="name"
           margin="normal"
           onChange={this.handleInput}
         />

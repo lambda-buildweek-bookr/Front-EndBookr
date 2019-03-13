@@ -33,6 +33,7 @@ class Books extends Component {
   //     .catch(err => console.log(err));
   // };
   deleteBook = (ev, id) => {
+    console.log(id);
     ev.preventDefault();
     const token = localStorage.getItem("jwt");
     const requestOptions = {
@@ -40,12 +41,14 @@ class Books extends Component {
         authorization: token
       }
     };
+    console.log(requestOptions);
     axios
       .delete(
-        `https://bookr-buildweek-backend.herokuapp.com/api/books/${id}`,
+        `https://bookr-buildweek-backend.herokuapp.com/api/books/4`,
         requestOptions
       )
       .then(res => {
+        console.log("testing");
         this.setState({ books: res.data }); // This may be able to be replaced
         this.props.history.push("/"); // by this where /BookList is wherever you want to send the user, perhaps the main page of books
       })
