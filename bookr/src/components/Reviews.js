@@ -22,7 +22,7 @@ class Reviews extends Component {
     })
   }
 
-  handleAddReview = event => {
+  addReview = event => {
     event.preventDefault()
 
     const infoReview = {
@@ -42,7 +42,7 @@ class Reviews extends Component {
     return (
       <div className="review">
         <h1>Add A Review</h1>
-        <form onSubmit={this.handleAddReview}>
+        <form onSubmit={this.addReview}>
           <div>
             <input type="text"
             name="review"
