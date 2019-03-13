@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import { Route, NavLink } from "react-router-dom";
 import BookForm from "./components/BookForm.js";
 import Book from "./components/Book.js";
+import Reviews from "./components/Reviews.js";
 import Books from "./components/Books.js";
 import NavBar from "./components/NavBar";
 import Login from "./components/Login";
@@ -51,8 +52,13 @@ class App extends Component {
           <NavLink to="book-form">Add Book</NavLink>
         </nav> */}
         <Route path="/login" component={Login} />
+
         <Route exact path="/" component={Books} />
-        {/* <Route
+      
+
+        <Route path="/review" component={Reviews} />
+        <Route
+
           exact
           path="/"
           render={props => (
