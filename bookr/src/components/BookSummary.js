@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import BookCard from "./BookCard";
+import Book from "./Book";
 
 // import { Link } from "react-router-dom";
 
@@ -46,8 +47,8 @@ export default class BookSummary extends React.Component {
   }
   render() {
     return (
-      <div>
-        <BookCard book={this.state.book} />
+      <div className="single-page-wrapper">
+        <BookCard styles={{ width: "600px" }} book={this.state.book} />
       </div>
     );
   }

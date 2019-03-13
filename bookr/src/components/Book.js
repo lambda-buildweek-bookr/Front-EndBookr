@@ -72,7 +72,7 @@ const Book = props => {
         </Button>
         <Link to={`/books/${props.id}`}>
           <Button size="small" color="primary">
-            Learn More
+            Add Review
           </Button>
         </Link>
       </CardActions>

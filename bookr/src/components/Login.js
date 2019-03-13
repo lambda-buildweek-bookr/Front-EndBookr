@@ -8,6 +8,18 @@ class Login extends React.Component {
     username: "",
     password: ""
   };
+  handleInput = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
+
+  handleLogin = () => {
+    window.localStorage.setItem("username", this.state.username);
+    window.localStorage.setItem("password", this.state.password);
+    window.location.reload();
+    this.props.history.push("/");
+  };
 
   render() {
     return (
@@ -39,6 +51,7 @@ class Login extends React.Component {
           placeholder="username"
           name="username"
           margin="normal"
+          onChange={this.handleInput}
         />
         <TextField
           id="standard-with-placeholder"
@@ -46,9 +59,11 @@ class Login extends React.Component {
           placeholder="password"
           margin="normal"
           name="password"
+          onChange={this.handleInput}
         />
         <Button
-          onClick={ev => this.props.history.push("/")}
+          onClick={this.handleLogin}
+          // onClick={ev => this.props.history.push("/")}
           color="primary"
           type="submit"
           variant="contained"
