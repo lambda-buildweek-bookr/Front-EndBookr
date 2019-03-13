@@ -23,12 +23,31 @@ class Books extends Component {
         console.log(err);
       });
   }
+  // deleteBook = (ev, id) => {
+  //   ev.preventDefault();
+  //   axios
+  //     .delete(`https://bookr-buildweek-backend.herokuapp.com/api/books/${id}`)
+  //     .then(res => {
+  //       this.setState({ books: res.data });
+  //     })
+  //     .catch(err => console.log(err));
+  // };
   deleteBook = (ev, id) => {
     ev.preventDefault();
+    const token = localStorage.getItem("jwt");
+    const requestOptions = {
+      headers: {
+        authorization: token
+      }
+    };
     axios
-      .delete(`https://bookr-buildweek-backend.herokuapp.com/api/books/${id}`)
+      .delete(
+        `https://bookr-buildweek-backend.herokuapp.com/api/books/${id}`,
+        requestOptions
+      )
       .then(res => {
-        this.setState({ books: res.data });
+        this.setState({ books: res.data }); // This may be able to be replaced
+        this.props.history.push("/"); // by this where /BookList is wherever you want to send the user, perhaps the main page of books
       })
       .catch(err => console.log(err));
   };

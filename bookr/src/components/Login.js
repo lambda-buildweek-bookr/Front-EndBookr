@@ -2,6 +2,7 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import logo from "../design/logo.png";
+import axios from "axios";
 
 class Login extends React.Component {
   state = {
@@ -14,11 +15,26 @@ class Login extends React.Component {
     });
   };
 
-  handleLogin = () => {
-    window.localStorage.setItem("username", this.state.username);
-    window.localStorage.setItem("password", this.state.password);
-    window.location.reload();
-    this.props.history.push("/");
+  handleLogin = (ev, token) => {
+    ev.preventDefault();
+    axios
+      .post(
+        `https://bookr-buildweek-backend.herokuapp.com/api/users/login`,
+        token
+      )
+      .then(res => {
+        localStorage.setItem("jwt", res.data.token);
+        localStorage.setItem("username", res.data.username);
+        this.props.history.push("/");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    // window.localStorage.setItem("username", this.state.username);
+    // window.localStorage.setItem("password", this.state.password);
+    // window.location.reload();
+    // this.props.history.push("/");
   };
 
   render() {
