@@ -39,7 +39,11 @@ function NavBar() {
             >
               <Button color="inherit">Add Book</Button>
             </NavLink>
-            <Button color="inherit">Review</Button>
+            <NavLink
+              style={{ textDecoration: "none", color: "white" }}
+              to="/review">
+              <Button color="inherit">Review</Button>
+            </NavLink>
             <NavLink
               style={{ textDecoration: "none", color: "white" }}
               to="/login"

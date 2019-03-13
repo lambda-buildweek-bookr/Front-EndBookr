@@ -6,8 +6,7 @@ class Reviews extends Component {
     this.state = {
       rating: 0,
       review: '',
-      reviewer: 'Davina',
-      book_id: props.book.id
+      reviewer: 'Davina'
     }
   }
 
@@ -29,8 +28,7 @@ class Reviews extends Component {
     const infoReview = {
       review: this.state.review,
       rating: this.state.rating,
-      reviewer: this.state.reviewer,
-      books_id: this.state.book_id
+      reviewer: this.state.reviewer
     }
     this.props.addReview(infoReview)
     this.setState({
