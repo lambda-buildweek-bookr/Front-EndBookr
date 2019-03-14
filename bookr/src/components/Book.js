@@ -87,11 +87,11 @@ export default class Book extends React.Component {
             </Link>
           </CardActions>
         </Card>
-        <div>
+        <Card>
           {this.state.reviews.map(book => (
-            <p key={book.id}>{book.review}</p>
+            <Typography key={book.id}>{book.review}</Typography>
           ))}
-        </div>
+        </Card>
       </>
     );
   }
