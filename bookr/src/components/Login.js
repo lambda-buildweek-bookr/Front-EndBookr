@@ -43,6 +43,7 @@ class Login extends React.Component {
     return (
       <form
         style={{
+          backgroundColor: "white",
           margin: "10% 35%",
           width: "250px",
           height: "420px",
