@@ -55,7 +55,7 @@ function NavBar() {
             <NavLink
               style={{ textDecoration: "none", color: "white" }}
               to="/review">
-              <Button color="inherit">Review</Button>
+          
             </NavLink>
             <NavLink
               style={{
@@ -68,7 +68,7 @@ function NavBar() {
               to="/login"
             >
               {" "}
-              
+
             </NavLink>
           </div>
         </Toolbar>

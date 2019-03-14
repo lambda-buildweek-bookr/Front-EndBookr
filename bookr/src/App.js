@@ -54,7 +54,7 @@ class App extends Component {
         <Route path="/login" component={Login} />
 
         <Route exact path="/" component={Books} />
-      
+
 
         <Route path="/review" component={Reviews} />
         <Route
@@ -68,7 +68,7 @@ class App extends Component {
               deleteBook={this.deleteBook}
             />
           )}
-        /> */}
+        /> 
         <Route path="/book-form" component={BookForm} />
         <Route
           path="/books/:id"

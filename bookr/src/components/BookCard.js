@@ -9,9 +9,11 @@ import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import Reviews from "./Reviews.js";
 
 const BookCard = props => {
   return (
+    <div>
     <Card className="card">
       <CardActionArea>
         <CardHeader
@@ -40,6 +42,8 @@ const BookCard = props => {
         </Link>
       </CardActions>
     </Card>
+    <Reviews/>
+    </div>
   );
 };
 

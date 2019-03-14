@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 
 class Reviews extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class Reviews extends Component {
 
   handleChange = event => {
     this.setState({
-      [event.target.value]: event.target.value
+      [event.target.name]: event.target.value
     })
   }
 
@@ -22,15 +23,16 @@ class Reviews extends Component {
     })
   }
 
-  addReview = event => {
+  handleAddReview = event => {
     event.preventDefault()
 
     const infoReview = {
       review: this.state.review,
       rating: this.state.rating,
-      reviewer: this.state.reviewer
+      reviewer: this.state.reviewer,
+      user_id: 1
     }
-    this.props.addReview(infoReview)
+    this.addReview(infoReview)
     this.setState({
       numberRating: 0,
       review: '',
@@ -38,11 +40,39 @@ class Reviews extends Component {
     this.setTimeout((window.location.reload()), 500)
   }
 
+  addReview = (event, infoReview) => {
+    //event.preventDefault()
+
+    const bookId = this.props.id
+
+    axios
+      .post('https://bookr-buildweek-backend.herokuapp.com/api/reviews/bookId', infoReview)
+      .then(res => {
+        console.log(res.data)
+        this.setState({ review: res.data })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
+      axios
+        .get('https://bookr-buildweek-backend.herokuapp.com/api/reviews/bookId')
+        .then(res => {
+          console.log(res.data)
+          this.setState({ review: res.data })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+
+  }
+
+
   render() {
     return (
       <div className="review">
         <h1>Add A Review</h1>
-        <form onSubmit={this.addReview}>
+        <form onSubmit={this.handleAddReview}>
           <div>
             <input type="text"
             name="review"
@@ -61,6 +91,7 @@ class Reviews extends Component {
           </div>
           <button type="submit">Submit A Review</button>
         </form>
+        <p>{this.state.review}</p>
       </div>
     )
   }
