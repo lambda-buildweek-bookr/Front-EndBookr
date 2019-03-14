@@ -9,7 +9,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-
+import AddReview from "./AddReview";
 // import "bootstrap/dist/css/bootstrap.min.css";
 
 export default class Book extends React.Component {
@@ -40,21 +40,39 @@ export default class Book extends React.Component {
         console.log(err);
       });
   };
-  addReview = (ev, id) => {
-    ev.preventDefault();
+  addReview = (event, infoReview) => {
+    event.preventDefault();
+
+    //const bookId = this.props.id
+    // const infoReview = {
+    //   review: this.state.review,
+    //   rating: this.state.rating,
+    infoReview.user_id = localStorage.getItem("id");
+    infoReview.book_id = this.props.book.id;
+
+    const token = localStorage.getItem("jwt");
+    const requestOptions = {
+      headers: {
+        authorization: token
+      }
+    };
+    console.log(infoReview);
     axios
       .post(
-        `https://bookr-buildweek-backend.herokuapp.com/api/reviews/${id}`,
-        this.state.review
+        `https://bookr-buildweek-backend.herokuapp.com/api/reviews/add/${
+          this.props.book.id
+        }`,
+        infoReview,
+        requestOptions
       )
       .then(res => {
-        console.log(res);
-        this.setState({
-          reviews: res.data.reviews,
-          review: ""
-        }).catch(err => {
-          console.log(err);
-        });
+        console.log(res.data);
+        var currentReviews = this.state.reviews;
+
+        this.setState({ reviews: [...currentReviews, res.data] });
+      })
+      .catch(err => {
+        console.log(err);
       });
   };
   handleChange = event => {
@@ -112,10 +130,11 @@ export default class Book extends React.Component {
             </Link>
           </CardActions>
         </Card>
-        <Reviews
+        <AddReview
           addReview={this.addReview}
-          handleChange={this.handleChange}
-          review={this.state.review}
+          // handleChange={this.handleChange}
+          // review={this.state.review}
+          bookId={this.props.book.id}
         />
         <Card>
           {this.state.reviews.map(book => (

@@ -8,7 +8,7 @@ const ConditionalRender = Books => Login =>
 
     componentDidMount = () => {
       if (window.localStorage.getItem("name", "password")) {
-        this.setState(prevState => ({ loggedIn: !prevState.loggedIn }));
+        this.setState({ loggedIn: true });
       }
     };
 

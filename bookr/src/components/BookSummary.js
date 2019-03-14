@@ -45,7 +45,6 @@ export default class BookSummary extends React.Component {
             return <Book {...props} book={this.state.book} />;
           }}
         />
-        {/* <Book  /> */}
       </div>
     );
   }
