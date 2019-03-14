@@ -29,27 +29,26 @@ class Login extends React.Component {
         this.state
       )
       .then(res => {
+        console.log(res.data);
         localStorage.setItem("jwt", res.data.token);
         localStorage.setItem("name", res.data.name);
-
+        localStorage.setItem("id", res.data.id);
         this.props.history.push("/");
       })
       .catch(err => {
         console.log(err);
       });
   };
-  // window.localStorage.setItem("username", this.state.username);
-  // window.localStorage.setItem("password", this.state.password);
-  // window.location.reload();
-  // this.props.history.push("/");
+
   render() {
     return (
       <form
         style={{
-          margin: "20% 30%",
+          backgroundColor: "white",
+          margin: "10% 37.5%",
           width: "300px",
-          height: "400px",
-          padding: "0% 5% ",
+          height: "420px",
+          padding: "0% 2% ",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-evenly",
@@ -59,16 +58,16 @@ class Login extends React.Component {
         <img
           style={{
             width: "200px",
-            height: "150px",
+            height: "120px",
 
-            margin: "0 15%"
+            margin: "0 10%"
           }}
           src={logo}
           alt="friends-logo"
         />
         <TextField
           id="standard-with-placeholder"
-          label="name"
+          label="username"
           placeholder="username"
           name="name"
           margin="normal"
