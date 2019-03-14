@@ -13,12 +13,12 @@
 }
 
 .card {
-  width: 250px;
-  height: 425px;
+  width: 220px;
+  height: 375px;
   border: 1px solid #636c75;
   margin: 5% 0;
 }
 .card-img {
-  height: 150px;
+  height: 100px;
   width: 100%;
 }

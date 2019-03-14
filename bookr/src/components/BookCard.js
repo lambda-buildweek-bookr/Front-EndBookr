@@ -16,14 +16,14 @@ const BookCard = props => {
       <CardActionArea>
         <CardHeader
           style={{ height: "75px" }}
-          title={props.book.title}
-          subheader={props.author}
+          title={props.book.author}
+          // subheader={props.book.author}
         />
 
         <img className="card-img" src={props.book.image_url} alt="img" />
       </CardActionArea>
       <CardContent>
-        <Typography component="p">"{props.description}"</Typography>
+        <Typography component="p">"{props.book.title}"</Typography>
       </CardContent>
       <CardActions>
         <Button

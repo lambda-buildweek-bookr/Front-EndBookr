@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Book from "./Book";
 import BookCard from "./BookCard";
 import { Link } from "react-router-dom";
 
@@ -23,15 +22,7 @@ class Books extends Component {
         console.log(err);
       });
   }
-  // deleteBook = (ev, id) => {
-  //   ev.preventDefault();
-  //   axios
-  //     .delete(`https://bookr-buildweek-backend.herokuapp.com/api/books/${id}`)
-  //     .then(res => {
-  //       this.setState({ books: res.data });
-  //     })
-  //     .catch(err => console.log(err));
-  // };
+
   deleteBook = (ev, id) => {
     console.log(id);
     ev.preventDefault();
@@ -44,51 +35,28 @@ class Books extends Component {
     console.log(requestOptions);
     axios
       .delete(
-        `https://bookr-buildweek-backend.herokuapp.com/api/books/4`,
+        `https://bookr-buildweek-backend.herokuapp.com/api/books/${id}`,
         requestOptions
       )
       .then(res => {
         console.log("testing");
-        this.setState({ books: res.data }); // This may be able to be replaced
-        this.props.history.push("/"); // by this where /BookList is wherever you want to send the user, perhaps the main page of books
+        this.setState({ books: res.data });
+        this.props.history.push("/");
       })
       .catch(err => console.log(err));
   };
 
   render() {
     return (
-      <div>
+      <div className="container">
         {this.state.books.map(book => (
-          <Link to={`/books/${book.id}`}>
+          <Link style={{ textDecoration: "none" }} to={`/books/${book.id}`}>
             <BookCard key={book.id} book={book} deleteBook={this.deleteBook} />
           </Link>
         ))}
       </div>
     );
   }
-  // render() {
-  //   return (
-  //     <div className="container">
-  //       {/* <h1>List Of Books</h1> */}
-  //       {/* <ul> */}
-  //       {this.props.books.map(book => {
-  //         return (
-  //           <Book
-  //             // book={book}
-  //             title={book.title}
-  //             id={book.id}
-  //             author={book.author}
-  //             description={book.brief_desc}
-  //             image={book.image_url}
-  //             key={book.id}
-  //             deleteBook={this.props.deleteBook}
-  //           />
-  //         );
-  //       })}
-  //       {/* </ul> */}
-  //     </div>
-  //   );
-  // }
 }
 
 export default Books;
