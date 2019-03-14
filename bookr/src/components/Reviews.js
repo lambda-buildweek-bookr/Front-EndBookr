@@ -23,47 +23,43 @@ class Reviews extends Component {
     })
   }
 
-  handleAddReview = event => {
+  addReview = (event) => {
     event.preventDefault()
 
+    //const bookId = this.props.id
     const infoReview = {
       review: this.state.review,
       rating: this.state.rating,
-      reviewer: this.state.reviewer,
-      user_id: 1
+      user_id: 6,
+      book_id: 12
     }
-    this.addReview(infoReview)
-    this.setState({
-      numberRating: 0,
-      review: '',
-    })
-    this.setTimeout((window.location.reload()), 500)
-  }
-
-  addReview = (event, infoReview) => {
-    //event.preventDefault()
-
-    const bookId = this.props.id
-
+    const token = localStorage.getItem("jwt");
+     const requestOptions = {
+       headers: {
+         authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkRhdmluYSIsImlhdCI6MTU1MjU5MDgyOSwiZXhwIjoxNTUyNjc3MjI5fQ.Dx3DBpdG8750ERZ0trXndXsdb47EBuxk7RzOLsspFrM'
+       }
+     };
+     console.log(infoReview)
     axios
-      .post('https://bookr-buildweek-backend.herokuapp.com/api/reviews/bookId', infoReview)
+      .post('https://bookr-buildweek-backend.herokuapp.com/api/reviews/add/12', infoReview, requestOptions)
       .then(res => {
         console.log(res.data)
+
         this.setState({ review: res.data })
       })
       .catch(err => {
         console.log(err)
       })
 
-      axios
-        .get('https://bookr-buildweek-backend.herokuapp.com/api/reviews/bookId')
-        .then(res => {
-          console.log(res.data)
-          this.setState({ review: res.data })
-        })
-        .catch(err => {
-          console.log(err)
-        })
+      // axios
+      //   .get('https://bookr-buildweek-backend.herokuapp.com/api/reviews')
+      //   .then(res => {
+      //     console.log(res.data)
+      //     this.setState({ review: res.data })
+      //   })
+      //   .catch(err => {
+      //     console.log(err)
+      //   })
 
   }
 
@@ -72,7 +68,7 @@ class Reviews extends Component {
     return (
       <div className="review">
         <h1>Add A Review</h1>
-        <form onSubmit={this.handleAddReview}>
+        <form onSubmit={this.addReview}>
           <div>
             <input type="text"
             name="review"
