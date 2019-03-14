@@ -38,7 +38,7 @@ export default class BookSummary extends React.Component {
   render() {
     return (
       <div className="single-page-wrapper">
-        <BookCard book={this.state.book} />
+        <Book book={this.state.book} />
       </div>
     );
   }
