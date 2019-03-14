@@ -25,7 +25,8 @@ export default class Book extends React.Component {
     super(props);
     this.state = {
       visible: true,
-      isOpen: false
+      isOpen: false,
+      review: ""
     };
   }
   toggleModal = () => {
@@ -75,7 +76,9 @@ export default class Book extends React.Component {
                   need to sleep
                 </ModalBody>
                 <ModalFooter>
-                  <Button color="secondary">Cancel</Button>
+                  <Button onClick={this.toggleModal} color="secondary">
+                    Cancel
+                  </Button>
                   <Button color="primary">Save</Button>
                 </ModalFooter>
               </Modal>
