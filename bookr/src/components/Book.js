@@ -30,7 +30,7 @@ export default class Book extends React.Component {
       .then(res => {
         console.log(res);
         this.setState({
-          reviews: res.data
+          reviews: res.data.reviews
         });
       })
       .catch(err => {
@@ -87,6 +87,11 @@ export default class Book extends React.Component {
             </Link>
           </CardActions>
         </Card>
+        <div>
+          {this.state.reviews.map(book => (
+            <p key={book.id}>{book.review}</p>
+          ))}
+        </div>
       </>
     );
   }
