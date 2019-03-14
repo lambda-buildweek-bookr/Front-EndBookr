@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import BookCard from "./BookCard";
 import Book from "./Book";
+import { Route } from "react-router-dom";
 
 export default class BookSummary extends React.Component {
   constructor(props) {
@@ -38,7 +39,13 @@ export default class BookSummary extends React.Component {
   render() {
     return (
       <div className="single-page-wrapper">
-        <Book book={this.state.book} />
+        <Route
+          path="/books/:id"
+          render={props => {
+            return <Book {...props} book={this.state.book} />;
+          }}
+        />
+        {/* <Book  /> */}
       </div>
     );
   }

@@ -7,16 +7,8 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
-// import Button from "@material-ui/core/Button";
+import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import {
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Button,
-  Alert
-} from "reactstrap";
 
 // import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -24,15 +16,26 @@ export default class Book extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: true,
-      isOpen: false,
-      review: ""
+      reviews: []
     };
   }
-  toggleModal = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
+  componentDidMount() {
+    console.log(this.props.match);
+    this.getReviews(this.props.match.params.id);
+  }
+
+  getReviews = id => {
+    axios
+      .get(`https://bookr-buildweek-backend.herokuapp.com/api/reviews/${id}`)
+      .then(res => {
+        console.log(res);
+        this.setState({
+          reviews: res.data
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
   render() {
     return (
@@ -68,34 +71,19 @@ export default class Book extends React.Component {
               style={{ textDecoration: "none" }}
               to={`/books/${this.props.book.id}`}
             >
-              <Modal isOpen={this.state.isOpen}>
-                <ModalHeader toggle={this.toggleModal}>Add review</ModalHeader>
-
-                <ModalBody>
-                  This book is no bueno mainly because it's really late and I
-                  need to sleep
-                </ModalBody>
-                <ModalFooter>
-                  <Button onClick={this.toggleModal} color="secondary">
-                    Cancel
-                  </Button>
-                  <Button color="primary">Save</Button>
-                </ModalFooter>
-              </Modal>
-
-              <Button
-                style={{
-                  width: "300px",
-                  // border: "1px solid #3F51B7",
-
-                  marginLeft: "80%"
-                }}
-                size="large"
-                color="primary"
-                onClick={this.toggleModal}
-              >
-                Add Review
-              </Button>
+              <Link style={{ textDecoration: "none" }} to="/review">
+                <Button
+                  style={{
+                    width: "300px",
+                    border: "1px solid #3F51B5",
+                    marginLeft: "80%"
+                  }}
+                  size="large"
+                  color="primary"
+                >
+                  Add Review
+                </Button>
+              </Link>
             </Link>
           </CardActions>
         </Card>

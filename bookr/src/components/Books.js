@@ -47,6 +47,11 @@ class Books extends Component {
       })
       .catch(err => console.log(err));
   };
+  toggleModal = () => {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  };
 
   render() {
     return (
