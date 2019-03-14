@@ -26,11 +26,10 @@ class Reviews extends Component {
   addReview = (event) => {
     event.preventDefault()
 
-    //const bookId = this.props.id
     const infoReview = {
       review: this.state.review,
       rating: this.state.rating,
-      user_id: 6,
+      user_id: 7,
       book_id: 12
     }
     const token = localStorage.getItem("jwt");
@@ -51,15 +50,7 @@ class Reviews extends Component {
         console.log(err)
       })
 
-      // axios
-      //   .get('https://bookr-buildweek-backend.herokuapp.com/api/reviews')
-      //   .then(res => {
-      //     console.log(res.data)
-      //     this.setState({ review: res.data })
-      //   })
-      //   .catch(err => {
-      //     console.log(err)
-      //   })
+
 
   }
 
@@ -87,7 +78,7 @@ class Reviews extends Component {
           </div>
           <button type="submit">Submit A Review</button>
         </form>
-        <p>{this.state.review}</p>
+
       </div>
     )
   }
