@@ -44,8 +44,8 @@ class Login extends React.Component {
       <form
         style={{
           backgroundColor: "white",
-          margin: "10% 35%",
-          width: "250px",
+          margin: "10% 37.5%",
+          width: "300px",
           height: "420px",
           padding: "0% 2% ",
           display: "flex",

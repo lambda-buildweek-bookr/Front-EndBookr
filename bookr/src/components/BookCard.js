@@ -33,9 +33,14 @@ const BookCard = props => {
         >
           Delete
         </Button>
-        <Link to={`/books/${props.book.id}`}>
+        <Link
+          style={{
+            textDecoration: "none"
+          }}
+          to={`/books/${props.book.id}`}
+        >
           <Button size="small" color="primary">
-            Add Review
+            Learn More
           </Button>
         </Link>
       </CardActions>

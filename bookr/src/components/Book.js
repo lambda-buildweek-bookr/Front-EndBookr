@@ -7,53 +7,96 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import {
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  Alert
+} from "reactstrap";
 
-const Book = props => {
-  return (
-    <Card style={{ width: "800px" }} className="book-card">
-      <CardActionArea>
-        <CardHeader
-          style={{ height: "75px" }}
-          title={props.book.title}
-          subheader={props.book.author}
-        />
+// import "bootstrap/dist/css/bootstrap.min.css";
 
-        {/* <img className="card-img" src={props.book.image_url} alt="img" /> */}
-      </CardActionArea>
-      <CardContent>
-        <Typography component="p">"{props.book.detailed_desc}"</Typography>
+export default class Book extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      visible: true,
+      isOpen: false
+    };
+  }
+  toggleModal = () => {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  };
+  render() {
+    return (
+      <>
+        <Card style={{ width: "800px" }} className="book-card">
+          <CardActionArea>
+            <CardHeader
+              style={{ height: "75px" }}
+              title={this.props.book.title}
+              subheader={this.props.book.author}
+            />
 
-        <p>
-          <strong>Published by:</strong> {props.book.publisher}
-        </p>
-      </CardContent>
-      <CardActions>
-        {/* <Button
-          onClick={ev => props.deleteBook(ev, props.book.id)}
+            {/* <img className="card-img" src={this.props.book.image_url} alt="img" /> */}
+          </CardActionArea>
+          <CardContent>
+            <Typography component="p">
+              "{this.props.book.detailed_desc}"
+            </Typography>
+
+            <p>
+              <strong>Published by:</strong> {this.props.book.publisher}
+            </p>
+          </CardContent>
+          <CardActions>
+            {/* <Button
+          onClick={ev => this.props.deleteBook(ev, this.props.book.id)}
           size="small"
           color="primary"
         >
           Delete
         </Button> */}
-        <Link style={{ textDecoration: "none" }} to={`/books/${props.book.id}`}>
-          <Button
-            style={{
-              width: "300px",
-              border: "1px solid #3F51B7",
+            <Link
+              style={{ textDecoration: "none" }}
+              to={`/books/${this.props.book.id}`}
+            >
+              <Modal isOpen={this.state.isOpen}>
+                <ModalHeader toggle={this.toggleModal}>Add review</ModalHeader>
 
-              marginLeft: "80%"
-            }}
-            size="large"
-            color="primary"
-          >
-            Add Review
-          </Button>
-        </Link>
-      </CardActions>
-    </Card>
-  );
-};
+                <ModalBody>
+                  This book is no bueno mainly because it's really late and I
+                  need to sleep
+                </ModalBody>
+                <ModalFooter>
+                  <Button color="secondary">Cancel</Button>
+                  <Button color="primary">Save</Button>
+                </ModalFooter>
+              </Modal>
 
-export default Book;
+              <Button
+                style={{
+                  width: "300px",
+                  // border: "1px solid #3F51B7",
+
+                  marginLeft: "80%"
+                }}
+                size="large"
+                color="primary"
+                onClick={this.toggleModal}
+              >
+                Add Review
+              </Button>
+            </Link>
+          </CardActions>
+        </Card>
+      </>
+    );
+  }
+}
