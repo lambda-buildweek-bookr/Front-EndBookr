@@ -1,5 +1,5 @@
 import React from "react";
-import BookSummary from "./BookSummary";
+import Reviews from "./Reviews";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Card from "@material-ui/core/Card";
@@ -16,11 +16,14 @@ export default class Book extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: []
+      reviews: [],
+      review: "",
+      rating: "",
+      reviewer: ""
     };
   }
   componentDidMount() {
-    console.log(this.props.match);
+    // console.log(this.props.match);
     this.getReviews(this.props.match.params.id);
   }
 
@@ -28,7 +31,7 @@ export default class Book extends React.Component {
     axios
       .get(`https://bookr-buildweek-backend.herokuapp.com/api/reviews/${id}`)
       .then(res => {
-        console.log(res);
+        // console.log(res);
         this.setState({
           reviews: res.data.reviews
         });
@@ -36,6 +39,28 @@ export default class Book extends React.Component {
       .catch(err => {
         console.log(err);
       });
+  };
+  addReview = (ev, id) => {
+    ev.preventDefault();
+    axios
+      .post(
+        `https://bookr-buildweek-backend.herokuapp.com/api/reviews/${id}`,
+        this.state.review
+      )
+      .then(res => {
+        console.log(res);
+        this.setState({
+          reviews: res.data.reviews,
+          review: ""
+        }).catch(err => {
+          console.log(err);
+        });
+      });
+  };
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
   };
   render() {
     return (
@@ -87,9 +112,14 @@ export default class Book extends React.Component {
             </Link>
           </CardActions>
         </Card>
+        <Reviews
+          addReview={this.addReview}
+          handleChange={this.handleChange}
+          review={this.state.review}
+        />
         <Card>
           {this.state.reviews.map(book => (
-            <Typography key={book.id}>{book.review}</Typography>
+            <Typography key={book.id}> {book.review}</Typography>
           ))}
         </Card>
       </>

@@ -26,10 +26,14 @@ class App extends Component {
     return (
       <div className="App">
         <NavBar />
-
-        <Route path="/login" component={Login} />
+        <Route
+          path="/login"
+          render={props => {
+            return <Login {...props} />;
+          }}
+        />
         <Route path="/review" component={Reviews} />
-        <Route exact path="/" component={Books} />
+        <Route exact path="/" component={View} />
         <Route path="/book-form" component={BookForm} />
         <Route
           path="/books/:id"
