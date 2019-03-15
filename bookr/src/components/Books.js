@@ -42,8 +42,11 @@ class Books extends Component {
       )
       .then(res => {
         console.log("testing");
+        console.log(res.data);
         this.setState({ books: res.data });
-        this.props.history.push("/");
+        // this.props.history.push("/");
+        // console.log(this.state.books);
+        console.log("end of delete");
       })
       .catch(err => console.log(err));
   };

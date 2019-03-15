@@ -1,5 +1,5 @@
 import React from "react";
-import Reviews from "./Reviews";
+import SingleReview from "./SingleReview";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Card from "@material-ui/core/Card";
@@ -23,7 +23,6 @@ export default class Book extends React.Component {
     };
   }
   componentDidMount() {
-    // console.log(this.props.match);
     this.getReviews(this.props.match.params.id);
   }
 
@@ -31,7 +30,6 @@ export default class Book extends React.Component {
     axios
       .get(`https://bookr-buildweek-backend.herokuapp.com/api/reviews/${id}`)
       .then(res => {
-        // console.log(res);
         this.setState({
           reviews: res.data.reviews
         });
@@ -42,11 +40,6 @@ export default class Book extends React.Component {
   };
   addReview = (event, infoReview) => {
     event.preventDefault();
-
-    //const bookId = this.props.id
-    // const infoReview = {
-    //   review: this.state.review,
-    //   rating: this.state.rating,
     infoReview.user_id = localStorage.getItem("id");
     infoReview.book_id = this.props.book.id;
 
@@ -69,7 +62,10 @@ export default class Book extends React.Component {
         console.log(res.data);
         var currentReviews = this.state.reviews;
 
-        this.setState({ reviews: [...currentReviews, res.data] });
+        this.setState({
+          reviews: [...currentReviews, res.data],
+          reviews: ""
+        });
       })
       .catch(err => {
         console.log(err);
@@ -80,6 +76,7 @@ export default class Book extends React.Component {
       [event.target.name]: event.target.value
     });
   };
+
   render() {
     return (
       <>
@@ -90,8 +87,6 @@ export default class Book extends React.Component {
               title={this.props.book.title}
               subheader={this.props.book.author}
             />
-
-            {/* <img className="card-img" src={this.props.book.image_url} alt="img" /> */}
           </CardActionArea>
           <CardContent>
             <Typography component="p">
@@ -103,13 +98,6 @@ export default class Book extends React.Component {
             </p>
           </CardContent>
           <CardActions>
-            {/* <Button
-          onClick={ev => this.props.deleteBook(ev, this.props.book.id)}
-          size="small"
-          color="primary"
-        >
-          Delete
-        </Button> */}
             <Link
               style={{ textDecoration: "none" }}
               to={`/books/${this.props.book.id}`}
@@ -130,17 +118,17 @@ export default class Book extends React.Component {
             </Link>
           </CardActions>
         </Card>
-        <AddReview
-          addReview={this.addReview}
-          // handleChange={this.handleChange}
-          // review={this.state.review}
-          bookId={this.props.book.id}
-        />
-        <Card>
+        <AddReview addReview={this.addReview} bookId={this.props.book.id} />
+        <div>
           {this.state.reviews.map(book => (
-            <Typography key={book.id}> {book.review}</Typography>
+            <SingleReview
+              key={book.id}
+              rating={book.rating}
+              review={book.review}
+              user={this.user}
+            />
           ))}
-        </Card>
+        </div>
       </>
     );
   }
