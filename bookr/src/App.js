@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
-import { Route, NavLink } from "react-router-dom";
+
+import { Route } from "react-router-dom";
 import BookForm from "./components/BookForm.js";
-import Book from "./components/Book.js";
+
 import Books from "./components/Books.js";
 import NavBar from "./components/NavBar";
 import Login from "./components/Login";
 import BookSummary from "./components/BookSummary";
 import ConditionalRender from "./components/ConditionalRender/ConditionalRender";
-import axios from "axios";
+
 import Reviews from "./components/Reviews";
 import "./App.css";
 // import "bootstrap/dist/css/bootstrap.min.css";

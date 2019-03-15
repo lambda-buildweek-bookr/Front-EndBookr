@@ -1,7 +1,5 @@
 import React from "react";
-import BookSummary from "./BookSummary";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -23,7 +21,9 @@ const BookCard = props => {
         <img className="card-img" src={props.book.image_url} alt="img" />
       </CardActionArea>
       <CardContent>
-        <Typography component="p">"{props.book.title}"</Typography>
+        <Typography style={{ height: "30px" }} component="p">
+          "{props.book.title}"
+        </Typography>
       </CardContent>
       <CardActions>
         <Button

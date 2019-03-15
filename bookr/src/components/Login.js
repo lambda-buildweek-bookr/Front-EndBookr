@@ -26,7 +26,7 @@ class Login extends React.Component {
     axios
       .post(
         `https://bookr-buildweek-backend.herokuapp.com/api/users/login`,
-        this.state
+        state
       )
       .then(res => {
         console.log(res.data);

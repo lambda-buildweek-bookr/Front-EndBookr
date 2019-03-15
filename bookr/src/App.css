@@ -6,20 +6,20 @@
 
   display: flex;
   flex-flow: row wrap;
-  width: 850px;
+  width: 1050px;
 
   justify-content: space-around;
-  margin-left: 15%;
+  margin: 5% 10%;
 }
 
 .card {
-  width: 200px;
-  height: 375px;
+  width: 240px;
+  height: 385px;
   border: 1px solid #636c75;
-  margin: 15% 0%;
+  margin: 15% 0;
 }
 .card-img {
-  height: 100px;
+  height: 200px;
   width: 100%;
 }
 .book-card {

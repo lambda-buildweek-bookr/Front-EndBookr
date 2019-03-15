@@ -1,5 +1,5 @@
 import React from "react";
-import Reviews from "./Reviews";
+import SingleReview from "./SingleReview";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Card from "@material-ui/core/Card";
@@ -18,12 +18,11 @@ export default class Book extends React.Component {
     this.state = {
       reviews: [],
       review: "",
-      rating: "",
+      rating: 0,
       reviewer: ""
     };
   }
   componentDidMount() {
-    // console.log(this.props.match);
     this.getReviews(this.props.match.params.id);
   }
 
@@ -31,7 +30,6 @@ export default class Book extends React.Component {
     axios
       .get(`https://bookr-buildweek-backend.herokuapp.com/api/reviews/${id}`)
       .then(res => {
-        // console.log(res);
         this.setState({
           reviews: res.data.reviews
         });
@@ -40,13 +38,13 @@ export default class Book extends React.Component {
         console.log(err);
       });
   };
+  handleRatings = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
   addReview = (event, infoReview) => {
     event.preventDefault();
-
-    //const bookId = this.props.id
-    // const infoReview = {
-    //   review: this.state.review,
-    //   rating: this.state.rating,
     infoReview.user_id = localStorage.getItem("id");
     infoReview.book_id = this.props.book.id;
 
@@ -69,17 +67,22 @@ export default class Book extends React.Component {
         console.log(res.data);
         var currentReviews = this.state.reviews;
 
-        this.setState({ reviews: [...currentReviews, res.data] });
+        this.setState({
+          reviews: [...currentReviews, res.data],
+          reviews: ""
+        });
       })
       .catch(err => {
         console.log(err);
       });
   };
+
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
     });
   };
+
   render() {
     return (
       <>
@@ -90,12 +93,15 @@ export default class Book extends React.Component {
               title={this.props.book.title}
               subheader={this.props.book.author}
             />
-
-            {/* <img className="card-img" src={this.props.book.image_url} alt="img" /> */}
+            <img
+              style={{ width: "200px", height: "250px" }}
+              src={this.props.book.image_url}
+              alt="book url img"
+            />
           </CardActionArea>
           <CardContent>
-            <Typography component="p">
-              "{this.props.book.detailed_desc}"
+            <Typography style={{ marginBottom: "2%" }} component="p">
+              <strong>Summary:</strong> "{this.props.book.detailed_desc}"
             </Typography>
 
             <p>
@@ -103,44 +109,31 @@ export default class Book extends React.Component {
             </p>
           </CardContent>
           <CardActions>
-            {/* <Button
-          onClick={ev => this.props.deleteBook(ev, this.props.book.id)}
-          size="small"
-          color="primary"
-        >
-          Delete
-        </Button> */}
             <Link
               style={{ textDecoration: "none" }}
               to={`/books/${this.props.book.id}`}
             >
-              <Link style={{ textDecoration: "none" }} to="/review">
-                <Button
-                  style={{
-                    width: "300px",
-                    border: "1px solid #3F51B5",
-                    marginLeft: "80%"
-                  }}
-                  size="large"
-                  color="primary"
-                >
-                  Add Review
-                </Button>
-              </Link>
+              <Link style={{ textDecoration: "none" }} to="/review" />
             </Link>
           </CardActions>
         </Card>
         <AddReview
+          reviews={this.state.reviews}
           addReview={this.addReview}
-          // handleChange={this.handleChange}
-          // review={this.state.review}
           bookId={this.props.book.id}
+          review={this.state.review}
+          rating={this.state.rating}
         />
-        <Card>
+        <div>
           {this.state.reviews.map(book => (
-            <Typography key={book.id}> {book.review}</Typography>
+            <SingleReview
+              key={book.id}
+              rating={book.rating}
+              review={book.review}
+              reviews={this.state.reviews}
+            />
           ))}
-        </Card>
+        </div>
       </>
     );
   }

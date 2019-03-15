@@ -1,13 +1,14 @@
 import React, { Component } from "react";
-import axios from "axios";
+import Button from "@material-ui/core/Button";
+import { TextField, Typography } from "@material-ui/core";
 
-class Reviews extends Component {
+class AddReview extends Component {
   constructor(props) {
     super(props);
     this.state = {
       rating: 0,
       review: "",
-      reviewer: "Davina"
+      reviewer: ""
     };
   }
 
@@ -33,33 +34,49 @@ class Reviews extends Component {
 
   render() {
     return (
-      <div className="review">
-        <h1>Add A Review</h1>
+      <div style={{ margin: "8% 0" }} className="review">
+        <Typography style={{ fontSize: "24px", marginBottom: "3%" }}>
+          Add review and rating
+        </Typography>
         <form onSubmit={this.addReview}>
-          <div>
-            <input
-              type="text"
-              name="review"
-              value={this.state.review}
-              onChange={this.handleChange}
-              size="50"
-              placeholder="enter a review"
-            />
-            <input
-              type="number"
-              name="rating"
-              value={this.state.rating}
-              onChange={this.handleRatings}
-              min="1"
-              max="5"
-            />
-          </div>
-          <button type="submit">Submit A Review</button>
+          {/* <div> */}
+          <TextField
+            type="text"
+            name="review"
+            value={this.state.review}
+            onChange={this.handleChange}
+            style={{ width: "575px", marginRight: "3%" }} // size="50"
+            placeholder="Add review here..."
+          />
+          <TextField
+            style={{ width: "50px", marginRight: "1%" }}
+            type="number"
+            name="rating"
+            value={this.state.rating}
+            onChange={this.handleRatings}
+            min="1"
+            max="5"
+          />
+          {/* </div> */}
+          <Button
+            style={{
+              backgroundColor: "#3F51B5",
+              color: "white",
+              marginLeft: "3%"
+              //   width: "300px",
+              //   border: "1px solid "
+            }}
+            // size="large"
+
+            type="submit"
+          >
+            Submit
+          </Button>
         </form>
-        <p>{this.state.review}</p>
+        {/* <p>{this.state.review}</p> */}
       </div>
     );
   }
 }
 
-export default Reviews;
+export default AddReview;
