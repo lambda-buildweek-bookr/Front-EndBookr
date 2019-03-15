@@ -21,7 +21,9 @@ const BookCard = props => {
         <img className="card-img" src={props.book.image_url} alt="img" />
       </CardActionArea>
       <CardContent>
-        <Typography component="p">"{props.book.title}"</Typography>
+        <Typography style={{ height: "30px" }} component="p">
+          "{props.book.title}"
+        </Typography>
       </CardContent>
       <CardActions>
         <Button

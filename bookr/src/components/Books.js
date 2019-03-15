@@ -45,15 +45,10 @@ class Books extends Component {
         console.log(res.data);
         this.setState({ books: res.data });
         // this.props.history.push("/");
-        // console.log(this.state.books);
+        console.log(this.state.books);
         console.log("end of delete");
       })
       .catch(err => console.log(err));
-  };
-  toggleModal = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
   };
 
   render() {

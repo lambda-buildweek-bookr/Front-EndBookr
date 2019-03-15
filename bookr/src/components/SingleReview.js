@@ -9,24 +9,29 @@ import Typography from "@material-ui/core/Typography";
 
 export default function SingleReview(props) {
   return (
-    <Card style={{ width: "800px" }} className="book-card">
-      {/* <CardActionArea> */}
-      <i className="fas fa-user-circle fa-2x" />
-      <div>{localStorage.name}</div>
+    <>
+      <Card style={{ width: "600px", marginTop: "3%" }} className="book-card">
+        <div
+          style={{
+            width: "100px",
+            display: "flex",
+            justifyContent: "space-between"
+          }}
+        >
+          <i
+            style={{ color: "#3F51B5" }}
+            className="fas fa-user-circle fa-2x"
+          />
+          <div style={{ fontSize: "17px" }}>{localStorage.name}</div>
 
-      <span>{props.rating}/5</span>
-      <CardHeader
-        style={{ height: "75px" }}
-        // title={props.review}
-        // subheader={props.review}
-      />
-      {/* <img className="card-img" src={this.props.book.image_url} alt="img" /> */}
-      {/* </CardActionArea> */}
-      <CardContent>
-        {/* <Typography component="p">"{props.review}"</Typography> */}
+          <span> {props.rating}/5</span>
+        </div>
+        <CardHeader />
 
-        <p>{props.review}</p>
-      </CardContent>
-    </Card>
+        <CardContent>
+          <p>{props.review}</p>
+        </CardContent>
+      </Card>
+    </>
   );
 }

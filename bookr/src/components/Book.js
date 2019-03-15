@@ -18,7 +18,7 @@ export default class Book extends React.Component {
     this.state = {
       reviews: [],
       review: "",
-      rating: "",
+      rating: 0,
       reviewer: ""
     };
   }
@@ -37,6 +37,11 @@ export default class Book extends React.Component {
       .catch(err => {
         console.log(err);
       });
+  };
+  handleRatings = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
   };
   addReview = (event, infoReview) => {
     event.preventDefault();
@@ -71,6 +76,7 @@ export default class Book extends React.Component {
         console.log(err);
       });
   };
+
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
@@ -87,10 +93,15 @@ export default class Book extends React.Component {
               title={this.props.book.title}
               subheader={this.props.book.author}
             />
+            <img
+              style={{ width: "200px", height: "250px" }}
+              src={this.props.book.image_url}
+              alt="book url img"
+            />
           </CardActionArea>
           <CardContent>
-            <Typography component="p">
-              "{this.props.book.detailed_desc}"
+            <Typography style={{ marginBottom: "2%" }} component="p">
+              <strong>Summary:</strong> "{this.props.book.detailed_desc}"
             </Typography>
 
             <p>
@@ -102,30 +113,24 @@ export default class Book extends React.Component {
               style={{ textDecoration: "none" }}
               to={`/books/${this.props.book.id}`}
             >
-              <Link style={{ textDecoration: "none" }} to="/review">
-                <Button
-                  style={{
-                    width: "300px",
-                    border: "1px solid #3F51B5",
-                    marginLeft: "80%"
-                  }}
-                  size="large"
-                  color="primary"
-                >
-                  Add Review
-                </Button>
-              </Link>
+              <Link style={{ textDecoration: "none" }} to="/review" />
             </Link>
           </CardActions>
         </Card>
-        <AddReview addReview={this.addReview} bookId={this.props.book.id} />
+        <AddReview
+          reviews={this.state.reviews}
+          addReview={this.addReview}
+          bookId={this.props.book.id}
+          review={this.state.review}
+          rating={this.state.rating}
+        />
         <div>
           {this.state.reviews.map(book => (
             <SingleReview
               key={book.id}
               rating={book.rating}
               review={book.review}
-              user={this.user}
+              reviews={this.state.reviews}
             />
           ))}
         </div>
