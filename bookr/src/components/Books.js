@@ -17,7 +17,7 @@ class Books extends Component {
     axios
       .get("https://bookr-buildweek-backend.herokuapp.com/api/books")
       .then(res => {
-        console.log(res);
+        // console.log(res);
         this.setState({ books: res.data });
       })
       .catch(err => {
@@ -43,7 +43,7 @@ class Books extends Component {
       .then(res => {
         console.log("testing");
         console.log(res.data);
-        this.setState({ books: res.data });
+        this.setState({ books: res.data.books });
         // this.props.history.push("/");
         console.log(this.state.books);
         console.log("end of delete");
