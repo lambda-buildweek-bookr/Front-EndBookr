@@ -1,0 +1,41 @@
+h1 {
+  text-align: center;
+  margin-bottom: 2%;
+  padding-top: 11px;
+  font-family: fantasy;
+  color: inherit;
+}
+
+.review {
+  justify-content: center;
+  margin-bottom: 6%;
+  @media(max-width: 500px) {
+    display: block;
+  }
+}
+
+input {
+  margin-bottom: 3%;
+  margin-right: 1%;
+  @media(max-width: 500px) {
+    width: 83%;
+    margin: 0 auto;
+  }
+}
+
+button {
+  width: 10rem;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  padding: .6rem;
+  border-radius: 11px;
+  margin: 1% auto;
+  cursor: pointer;
+  background: honeydew;
+  font-weight: bold;
+  font-family: inherit;
+  @media(max-width: 500px) {
+    margin-left: 35%;
+  }
+}
